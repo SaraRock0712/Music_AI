@@ -11,7 +11,7 @@ song2_status = "";
 
 function preload(){
     song_1 = loadSound("music.mp3");
-    song_2 = loadSound("");
+    song_2 = loadSound("music1.mp3");
 }
 
 function setup(){
@@ -50,6 +50,35 @@ function gotPoses(results){
 
 function draw(){
     image(video, 0 , 0 , 600, 500);
+    song1_status = song_1.isPlaying();
+    song2_status = song_2.isPlaying();
+    fill("#FF0000");
+    stroke("#FF0000");
+    
+    if(score_rightWrist > 0.2)
+    {
+        circle(right_wrist_x, right_wrist_y, 20);
+        song_2.stop();
+
+        if(song1_status == false)
+        {
+            song_1.play();
+            document.getElementById("song").innerHTML = "Playing - Winter Bear by BTS V";
+        }
+    }
+
+    if(score_leftWrist > 0.2)
+    {
+        circle(left_wrist_x, left_wrist_y, 20);
+        song_1.stop();
+
+        if(song2_status == false)
+        {
+            song_2.play();
+            document.getElementById("song").innerHTML = "Playing - Sour Candy by Blackpink";
+        }
+    }
+
 }
 
 function play(){
